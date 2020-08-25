@@ -11,7 +11,8 @@ def init_swarm(server):
     try:
         server.run('sudo apt-get update')
         server.run('sudo apt-get upgrade -y')
-        typer.echo("Init Docker Swarm Node Manager")
+        msg = typer.style("Init Docker Swarm Node Mannager", fg=typer.colors.BLUE, bold=True)
+        typer.echo(msg)
         #server.run('sudo docker swarm leave --force')
         server.run('sudo docker swarm init')
         return str(server.run('sudo docker node ls')).split()[16]
