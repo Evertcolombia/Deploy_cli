@@ -11,12 +11,13 @@ def install_docker(server):
         server.run('docker -v')
     except:
         try:
-            typer.echo("The server is being update")
+            msg = typer.style("The server is being update", fg=typer.colors.BLUE, bold=True)
+            typer.echo(msg)
             server.run('sudo apt-get update')
             server.run('sudo apt-get upgrade -y')
-            typer.echo('Download Docker')
+            msg = typer.style("Install Docker", fg=typer.colors.BLUE, bold=True)
+            typer.echo(msg)
             server.run('curl -fsSL get.docker.com -o get-docker.sh')
-            typer.echo('Install Docker using the stable channel -instead of the default edge')
             server.run('CHANNEL=stable sh get-docker.sh')
             server.run('rm get-docker.sh')
         except socket.error:

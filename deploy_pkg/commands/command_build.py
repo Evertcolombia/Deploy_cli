@@ -11,19 +11,20 @@ app = typer.Typer()
 
 
 @app.command()
-def hello(
-            # ip: str = typer.Argument(...),
-            # key_ssh: str = typer.Argument(...),
-            # user_ssh: str = typer.Argument(...),
-            ip: str = typer.Option(...),
-            key_ssh: str = typer.Option(...),
-            user_ssh: str = typer.Option(...),
+def setUp(
+            ip: str = typer.Argument(...),
+            key_ssh: str = typer.Argument(...),
+            user_ssh: str = typer.Argument(...),
+            #ip: str = typer.Option(...),
+            #key_ssh: str = typer.Option(...),
+            #user_ssh: str = typer.Option(...),
             swarm_mode: Optional[bool] = False
 ):
-    """yummy"""
+    """Create connection"""
     server = create_connection(user_ssh, ip, key_ssh)
     install_docker(server)
     install_docker_compose(server)
     if swarm_mode:
         node_token = init_swarm(server)
-        typer.echo("Manager Node token : {}".format(node_token))
+        msg = typer.style("Mannager Node Token : {}".format(node_token), fg=typer.colors.BLUE, bold=True)
+        typer.echo(msg)
