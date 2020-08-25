@@ -11,8 +11,11 @@ Install and update using pip
 pip install -r requirements.txt
 ```
 
+# USAGE
+--------
+
 Use this command for setup server with initial packages
-arguments are represented by -- example: --
+arguments are represented by -- example: --ip
 
 arguments: {
     --ip: ip of the server to connect,
@@ -34,3 +37,9 @@ it will create a Mannager node from this server
 
 * This install [Docker, docker-compose, Swarm mode(optional)]
 
+# AUTHORS
+## - Guxal  | https://github.com/guxal/
+## - Evertcolombia | https://github.com/evertcolombia/
+
+# License
+## MIT Free Software, Hell Yeah!
