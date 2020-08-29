@@ -24,7 +24,3 @@ def setUp(
     server = create_connection(user_ssh, ip, key_ssh)
     install_docker(server)
     install_docker_compose(server)
-    if swarm_mode:
-        node_token = init_swarm(server)
-        msg = typer.style("Mannager Node Token : {}".format(node_token), fg=typer.colors.BLUE, bold=True)
-        typer.echo(msg)

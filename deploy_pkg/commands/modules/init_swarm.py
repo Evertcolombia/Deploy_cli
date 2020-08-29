@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
 
+import os
 import socket
 
 import paramiko
 import typer
 from colored import fg, stylize
 
+from .create_swarm_file import create_swarm_file
 
-def init_swarm(server):
+
+def init_swarm(server, hostname: str):
     try:
-        server.run('sudo apt-get update')
-        server.run('sudo apt-get upgrade -y')
+        path = os.getcwd() + '/commands/modules/swarm.sh'
         msg = typer.style("Init Docker Swarm Node Mannager", fg=typer.colors.BLUE, bold=True)
         typer.echo(msg)
-        #server.run('sudo docker swarm leave --force')
-        server.run('sudo docker swarm init')
+        create_swarm_file(hostname)
+        server.put(path, '/home/ubuntu')
+        server.run('bash swarm.sh')
         return str(server.run('sudo docker node ls')).split()[16]
     except socket.error:
-        typer.echo(stylize(f"Unable to connect", fg("red")))
+        typer.echo(typer.style("Unable to connect", fg=typer.colors.RED))
         exit(0)
     except paramiko.ssh_exception.AuthenticationException:
-        typer.echo(stylize(f"SSH Error, verify the kay path", fg("red")))
+        typer.echo(typer.style("SSH Error, verify the kay path", fg=typer.colors.RED))
         exit(0)
