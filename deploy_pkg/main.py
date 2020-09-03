@@ -2,8 +2,8 @@
 
 """ Main program side """
 import commands.command_build as build
-import commands.command_init_service as traefik_service
-import commands.command_init_docker_swarm as init_swarm
+import commands.command_traefik_service as traefik_service
+import commands.command_docker_swarm as init_swarm
 import typer
 
 app = typer.Typer()
