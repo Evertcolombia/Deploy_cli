@@ -14,12 +14,11 @@ red = typer.colors.RED
 def init_service(host: str, server):
     try:
         path = os.getcwd() + '/commands/modules/init_service.sh'
-        msg = typer.style('variable to use Traefik', fg=blue, bold=True)
-        typer.echo(msg)
         init_service_file(host, path)
         server.put(path, '.')
-        server.run("bash init_service.sh")
+        msg = typer.style("Update server and hostname", fg=blue, bold=True)
         typer.echo(msg)
+        server.run("bash init_service.sh")
     except socket.error:
         typer.echo(typer.style('unable to connect', fg=red, bold=True))
         exit(0)
