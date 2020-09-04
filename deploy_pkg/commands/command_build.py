@@ -10,9 +10,9 @@ app = typer.Typer()
 
 @app.command()
 def setUp(
-            ip: str = typer.Argument(...),
-            key_ssh: str = typer.Argument(...),
-            user_ssh: str = typer.Argument(...),
+            ip: str = typer.Argument(..., help='Server IP'),
+            key_ssh: str = typer.Argument(..., help='SSH file path'),
+            user_ssh: str = typer.Argument(..., help='Server user'),
 ):
     """Create connection"""
     server = create_connection(user_ssh, ip, key_ssh)

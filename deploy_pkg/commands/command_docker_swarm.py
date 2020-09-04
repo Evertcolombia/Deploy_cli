@@ -4,26 +4,26 @@ from commands.modules.create_connection import create_connection
 from commands.modules.init_swarm import init_swarm
 from typing import Optional
 
-import typer
+from typer import Argument, Typer, colors, echo, style
 
-app = typer.Typer()
-blue = typer.colors.BLUE
-red = typer.colors.RED
+app = Typer()
+blue = colors.BLUE
+red = colors.RED
 
 
 @app.command()
-def swarm(ip: str = typer.Argument(...),
-            key_ssh: str = typer.Argument(..., help="Path to ssh key file"),
-            user_ssh: str = typer.Argument(..., help="User to use in serve"),
-            hostname: str = typer.Argument(..., help="Ex: ws01.example.com"),
-            swarm_mode: Optional[bool] = False
+def swarm(ip: str = Argument(..., help="Server IP"),
+        key_ssh: str = Argument(..., help="Path to ssh key file"),
+        user_ssh: str = Argument(..., help="User to use in serve"),
+        hostname: str = Argument(..., help="Ex: ws01.example.com"),
+        swarm_mode: Optional[bool] = False
 ):
     """Init Swarm Mode"""
     if swarm_mode:
         server = create_connection(user_ssh, ip, key_ssh)
-        nt = init_swarm(server, hostname)
-        msg = typer.style("Manager Node Token: {}".format(nt), fg=blue, bold=True)
-        typer.echo(msg)
+        n_tkn = init_swarm(server, hostname)
+
+        echo(style("Manager NodeToken: {}".format(n_tkn), fg=blue, bold=True))
     else:
-        typer.echo(typer.style("--swarm-mode must be set", fg=red, bold=True))
+        echo(style("--swarm-mode must be set", fg=red, bold=True))
         exit(0)
