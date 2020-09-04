@@ -16,15 +16,13 @@ def init_service_file(hostname, path):
     create_file(data, path)
 
 
-def traefik_data_file(path):
-    msg = typer.style("Starting Traefik Service", fg=blue, bold=True)
-    typer.echo(msg)
-    msg = typer.style("Enter a domain for Traefik dashboard", fg=blue, bold=True)
-    typer.echo(msg)
-    domain = 'traefik.sys.' + typer.prompt("example: 'thebestsite.com'")
+def traefik_data_file(path: str):
+    msg = "You need a subdomain for Traefik dashboard Make you sure that subdomain points to a valid IP and is set in the hosting service as something like this: traefik.sys.mysite.com\n Enter subdomain name"
+    msg = typer.style(msg, fg=blue, bold=True)
+    domain = typer.prompt(msg)
     username = typer.prompt('Enter username')
     email = typer.prompt('Enter email')
-    password = typer.prompt('Enter password')
+    password = typer.prompt('Enter password', confirmation_prompt=True, hide_input=True)
     data = ['#!/usr/bin/bash\n',
             'sudo chmod 666 /var/run/docker.sock\n',
             'docker network create --driver=overlay traefik-public\n',
