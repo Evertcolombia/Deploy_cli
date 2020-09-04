@@ -1,25 +1,23 @@
-#!/usr/bin/env python3
+#!/bin/env python3
 from commands.modules.create_connection import create_connection
 from commands.modules.init_service import init_service
 from commands.modules.init_traefik_service import init_traefik_service
 
-import typer
+from typer import Argument, Typer, colors, echo, style
 
-app = typer.Typer()
+app = Typer()
 
-blue = typer.colors.BLUE
 
 @app.command()
 def service(
-    ip: str = typer.Argument(...),
-    key_ssh: str = typer.Argument(...),
-    user_ssh: str = typer.Argument(...),
-    host: str = typer.Argument(...),
+    ip: str = Argument(..., help='Server IP'),
+    key_ssh: str = Argument(..., help='SHH file path'),
+    user_ssh: str = Argument(..., help='Server user'),
+    host: str = Argument(..., help='Server name domain'),
 ):
     """Create traefik load balancer/proxy service"""
     server = create_connection(user_ssh, ip, key_ssh)
     init_service(host, server)
     domain = init_traefik_service(server)
     entire_domain = 'https://{}'.format(domain)
-    msg = typer.style(entire_domain, fg=blue, bold=True)
-    typer.echo(msg)
+    echo(style(entire_domain, fg=colors.BLUE, bold=True))

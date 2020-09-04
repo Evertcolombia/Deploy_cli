@@ -21,6 +21,7 @@ def init_portainer_service(server):
         server.put(path, '.')
         server.run('bash portainer_file.sh')
         server.run('rm portainer_file.sh')
+        os.remove(path)
         server.run('docker stack ls')
         server.run('docker stack ps portainer')
         return domain

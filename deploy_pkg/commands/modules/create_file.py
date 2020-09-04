@@ -2,7 +2,7 @@
 
 import os
 
-from typer import colors, prompt, style
+from typer import colors, echo, prompt, style
 
 blue = colors.BLUE
 
@@ -52,6 +52,28 @@ def portainer_data_file(path: str):
             'docker stack deploy -c portainer.yml portainer']
     create_file(data, path)
     return domain
+
+def swarmprom_data_file(path: str):
+
+    username = prompt(style('Enter Username', fg=blue, bold=True))
+    msg = style('Enter Password', fg=blue, bold=True)
+    admin_pass = prompt(msg, confirmation_prompt=True, hide_input=True)
+    msg = "You need a list of subdomain pointing to your server/s for the diffrents services that Swamprom provides. Make you sure that subdomain's points to a valid IP and this set in the hosting service\n Please the the follow subdomain's in your hosting: [grafana.mysite.com, alertmanager.mysite.com, unsee.mysite.com, prometheus.mysite.com]"
+    echo(style(msg, fg=blue, bold=True))
+    msg = "Enter domain for the service ex('mysite.com')"
+    domain = prompt(style(msg, fg=blue, bold=True))
+    data = ['#!/usr/bin/bash\n',
+            'cd swarmprom\n'
+            'export ADMIN_USER={}\n'.format(username),
+            'export ADMIN_PASSWORD={}\n'.format(admin_pass),
+            'export HASHED_PASSWORD=$(openssl passwd -apr1 $ADMIN_PASSWORD)\n',
+            'export DOMAIN={}\n'.format(domain),
+            'curl -L dockerswarm.rocks/swarmprom.yml -o swarmprom.yml\n',
+            'docker stack deploy -c swarmprom.yml swarmprom']
+
+    create_file(data, path)
+    return domain
+
 
 def create_file(data, path):
     with open(path, 'w') as f:

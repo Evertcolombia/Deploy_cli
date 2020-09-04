@@ -4,10 +4,9 @@ from commands.modules.create_connection import create_connection
 from commands.modules.init_portainer_service import init_portainer_service
 from commands.modules.init_service import init_service
 
-import typer
-from typer import Argument, colors, echo, style
+from typer import Argument, colors, echo, style, Typer
 
-app = typer.Typer()
+app = Typer()
 
 @app.command()
 def service(ip: str = Argument(..., help="Server IP"),
