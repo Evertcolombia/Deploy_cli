@@ -74,6 +74,22 @@ def swarmprom_data_file(path: str):
     create_file(data, path)
     return domain
 
+def swarmpit_data_file(path: str):
+    msg = "You need a subdomain for swarmpit UX Make you sure that subdomain points to a valid IP and set in the hosting service like this: swamrpit.mysite.com\n Enter subdomain name"
+    style(msg, fg=blue, bold=True)
+    domain = prompt(msg)
+    data = ['#!/usr/bin/bash\n',
+            'export DOMAIN={}\n'.format(domain),
+            "export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')",
+            'docker node update --label-add swarmpit.db-data=true $NODE_ID\n',
+            'docker node update --label-add swarmpit.influx-data=true $NODE_ID\n',
+            'curl -L dockerswarm.rocks/swarmpit.yml -o swarmpit.yml\n',
+            'docker stack deploy -c swarmpit.yml swarmpit\n',
+            'docker stack ps swarmpit\n',
+            'docker service logs swarmpit_app']
+    create_file(data, path)
+    return domain
+
 
 def create_file(data, path):
     with open(path, 'w') as f:
