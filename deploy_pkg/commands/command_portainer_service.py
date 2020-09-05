@@ -1,10 +1,10 @@
 #!/bin/env python3
 
-from commands.modules.create_connection import create_connection
-from commands.modules.init_portainer_service import init_portainer_service
-from commands.modules.init_service import init_service
+from commands.controllers.create_connection import create_connection
+from commands.modules.portainer_service import init_portainer_service
+from commands.controllers.init_service import init_service
 
-from typer import Argument, colors, echo, style, Typer
+from typer import Argument, Typer, colors, echo, style
 
 app = Typer()
 
