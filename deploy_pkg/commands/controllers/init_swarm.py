@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
+import os
 import socket
 import sys
+from commands.controllers.create_file import init_service_file
 
 import paramiko
 from typer import colors, echo, style
-
-from .create_file import init_service_file
 
 blue = colors.BLUE
 red = colors.RED
@@ -20,7 +20,6 @@ def init_swarm(server, hostname: str):
         server.run('bash init_service.sh')
         server.run('docker swarm init\n')
         server.run('rm init_service.sh')
-        os.remove(path)
         return str(server.run('sudo docker node ls')).split()[16]
     except socket.error:
         echo(style("Unable to connect", fg=red, bold=True))

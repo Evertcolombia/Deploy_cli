@@ -1,7 +1,7 @@
 #!/bin/env python3
-from commands.modules.create_connection import create_connection
-from commands.modules.init_service import init_service
-from commands.modules.init_traefik_service import init_traefik_service
+from commands.controllers.create_connection import create_connection
+from commands.controllers.init_service import init_service
+from commands.modules.traefik_service import init_traefik_service
 
 from typer import Argument, Typer, colors, echo, style
 

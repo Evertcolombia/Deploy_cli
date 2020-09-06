@@ -16,7 +16,7 @@ def install_docker(server):
             echo(style("The server is being update", fg=blue, bold=True))
             server.run('sudo apt-get update')
             server.run('sudo apt-get upgrade -y')
-            echo(typer("Install Docker", fg=blue, bold=True))
+            echo(style("Install Docker", fg=blue, bold=True))
             server.run('curl -fsSL get.docker.com -o get-docker.sh')
             server.run('CHANNEL=stable sh get-docker.sh')
             server.run('rm get-docker.sh')

@@ -1,7 +1,7 @@
 #!/bin/env python3
 
-from commands.modules.create_connection import create_connection
-from commands.modules.init_swarm import init_swarm
+from commands.controllers.create_connection import create_connection
+from commands.controllers.init_swarm import init_swarm
 from typing import Optional
 
 from typer import Argument, Typer, colors, echo, style
@@ -12,7 +12,7 @@ red = colors.RED
 
 
 @app.command()
-def swarm(ip: str = Argument(..., help="Server IP"),
+def clouster(ip: str = Argument(..., help="Server IP"),
         key_ssh: str = Argument(..., help="Path to ssh key file"),
         user_ssh: str = Argument(..., help="User to use in serve"),
         hostname: str = Argument(..., help="Ex: ws01.example.com"),

@@ -6,7 +6,7 @@ import socket
 import paramiko
 from typer import colors, echo, style
 
-from .create_file import init_service_file
+from commands.controllers.create_file import init_service_file
 
 blue = colors.BLUE
 red = colors.RED

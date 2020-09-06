@@ -2,7 +2,7 @@
 
 import os
 import socket
-from commands.modules.create_file import swarmprom_data_file
+from commands.controllers.create_file import swarmprom_data_file
 
 import paramiko
 from typer import colors, echo, style
@@ -16,7 +16,7 @@ def init_swarmprom_service(server):
         setup swarmprom service components
     """
     try:
-        path = os.getcwd() + '/commands/modules/swarmprom_file.sh'
+        path = os.getcwd() + '/commands/templates/swarmprom_file.sh'
         echo(style("Setup Service", fg=blue, bold=True))
         server.run('git clone https://github.com/stefanprodan/swarmprom.git')
         server.run('cd swarmprom')
@@ -24,7 +24,7 @@ def init_swarmprom_service(server):
         server.put(path, '.')
         server.run('bash swarmprom_file.sh')
         server.run('rm swarmprom_file.sh')
-        os.remove(path)
+        #os.remove(path)
         echo(style('Stack list of connected services:', fg=blue, bold=True))
         server.run('docker stack ls')
         echo(style('services that swarmprom provide:', fg=blue, bold=True))
