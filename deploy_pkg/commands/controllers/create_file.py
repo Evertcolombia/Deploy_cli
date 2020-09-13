@@ -105,6 +105,13 @@ def landing_data_file(path:str):
     create_file(data, path)
     return domain
 
+def app_data_file(path:str):
+    data = ['#!/usr/bin/bash\n',
+            'cd viralizer/home/fantasma/viralizer\n',
+            'docker-compose up -d']
+    print(path)
+    create_file(data, path)
+
 
 def create_file(data, path):
     with open(path, 'w') as f:
