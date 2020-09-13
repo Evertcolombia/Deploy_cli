@@ -39,8 +39,8 @@ This command will deploy your files to the server that you choose and run here t
     }
 
     example:
-        python3 main.py app service 54.93.136.166 $HOME/sshkey root $HOME/app
-    
+        ./main.py app service 54.93.136.166 $HOME/sshkey root $HOME/app
+
 -[build]
 
 This command will install Docker and docker-compose in the server if they are'nt no installed yet
@@ -52,7 +52,7 @@ This command will install Docker and docker-compose in the server if they are'nt
     }
 
     example:
-        python3 mainy.py build setup 54.93.136.166 $HOME/private ubuntu
+        ./main.py build setup 54.93.136.166 $HOME/private ubuntu
 
 -[swarm]
 
@@ -66,8 +66,8 @@ This command will setup and launch a Docker SWARM CLOUSTER  in the server if it'
     }
 
     example:
-        python3 main.py swarm clouster 54.93.136.166 $HOME/private ubuntu --swarm_mode
-        
+        ./main.py swarm clouster 54.93.136.166 $HOME/private ubuntu --swarm_mode
+
 -[ssh]
 
 Automated SSH keys files config in host and server
@@ -80,14 +80,14 @@ Automated SSH keys files config in host and server
     }
 
     example:
-        python3 mainy.py ssh keygen 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+        ./main.py ssh keygen newkeyName root 54.93.136.166 4096
 
 
 ## The follow commands will receive the same Arguments each one:
 -----------------------------------------------------------------
 
   ### Arguments:
-  
+
     arguments: {
         ip: ip of the server to connect,
         key-ssh: path for the private key file,
@@ -98,39 +98,39 @@ Automated SSH keys files config in host and server
 -[traefik]
 
 This command will setup and launch a load_balancer/proxy  in the domain that user puts
-  
+
     example:
-        python3 mainy.py traefik service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+        ./mainy.py traefik service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
 
 -[swarmpit]
 
 This command will setup and launch a Swarmpit service in the domain that user puts
-    
+
     example:
-        python3 mainy.py swarmpit service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+        ./mainy.py swarmpit service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
 
 -[swarmprom]
 
 This command will setup and launch Swarmprom service in the domain that user puts
 
     example:
-        python3 mainy.py traefik service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
-    
+        ./mainy.py traefik service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+
 
 -[portainer]
 
 This command will setup and launch Portainer service in the domain that user puts
 
     example:
-        python3 mainy.py portainer service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
-    
+        ./mainy.py portainer service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+
 
 -[landing]
 
 This command will to deploy, setup and launch Landin web_page service in the domain that user select
 
     example:
-        python3 mainy.py landing service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
+        ./mainy.py landing service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
 
 
 # AUTHORS
