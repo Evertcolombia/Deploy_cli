@@ -47,12 +47,11 @@ This command will install Docker and docker-compose in the server if they are'nt
     arguments: {\
         ip: ip of the server to connect,\
         key-ssh: path for the private key file,\
-        user-ssh: user to use in the server,\
-        host: Hostname of the server where node runs\
+        user-ssh: user to use in the server\
     }
 
     example:\
-        python3 mainy.py build setup 54.93.136.166 $HOME/private ubuntu ws01.mysite.com
+        python3 mainy.py build setup 54.93.136.166 $HOME/private ubuntu
 
 -[swarm]
 
