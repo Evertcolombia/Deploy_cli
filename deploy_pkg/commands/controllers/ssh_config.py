@@ -11,12 +11,10 @@ def init_ssh_keys(key, user, ip, bits):
         on server that user config
     """
     path = getcwd() + '/commands/templates/ssh_config'
-    msg = style("Enter a phrasse for the SSH key.", fg=colors.BLUE, bold=True)
-    phrasse = prompt(msg)
 
     msg = "Creating SSH keys"
     echo(style(msg, fg=colors.BLUE, bold=True))
-    system('ssh-keygen -f $HOME/{} -b {} -N {}'.format(key, bits, phrasse))
+    system('ssh-keygen -f $HOME/{} -b {} -N ""'.format(key, bits))
 
     system('chmod 400 $HOME/{}'.format(key))
     msg = 'Can see key file in $HOME/{} folder'.format(key)
