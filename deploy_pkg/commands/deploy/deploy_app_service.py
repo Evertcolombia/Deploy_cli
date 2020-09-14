@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import socket
-from datetime import datetime
 from os import system
 from os.path import exists, isdir
 
@@ -15,7 +14,7 @@ def do_pack(dir_path):
             echo(style("Folder Don't exists", fg=colors.RED, bold=True),)
             exit(0)
         file_name = dir_path + "prototype"
-        system("sudo tar -cvzf {} {}".format(file_name, dir_path),)
+        system("sudo tar -cvzf {} {}".format(file_name, dir_path))
         return file_name
     except:
         return None
@@ -29,7 +28,9 @@ def do_deploy(archive_path, server):
         file_name = archive_path.split("/")[-1]
         server.run('mkdir -p {}'.format(folder))
         server.put(archive_path, '/tmp/')
-        server.run('tar -zxf /tmp/{} -C {}'.format(file_name, folder))
+        server.run('tar -zxf /tmp/{} -C .'.format(file_name))
+        server.run('cp -r home/fantasma/viralizer/* viralizer/')
+        server.run('rm -rf home/')
         server.run('rm /tmp/{}'.format(file_name))
     except socket.error:
         echo(style('unable to connect', fg=colors.RED, bold=True))

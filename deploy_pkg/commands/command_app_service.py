@@ -4,6 +4,7 @@ import os
 from commands.controllers.create_connection import create_connection
 from commands.controllers.create_file import app_data_file
 from commands.deploy.deploy_app_service import deploy
+from commands.controllers.run_app import run_app
 
 from typer import Argument, Typer, colors, echo, style
 
@@ -23,5 +24,4 @@ def service(ip: str = Argument(..., help='Server IP'),
     server = create_connection(user_ssh, ip, key_ssh)
     deploy(server, dir_path)
     app_data_file(path)
-    server.put(path, '.')
-    server.run('bash app_file.sh')
+    run_app(server, path)
