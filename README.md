@@ -53,6 +53,21 @@ This command will install Docker and docker-compose in the server if they are'nt
 
     example:
         ./main.py build setup 54.93.136.166 $HOME/private ubuntu
+        
+-[landing]
+
+This command will to deploy, setup and launch Landin web_page service in the domain that user select
+
+     arguments: {
+        ip: ip of the server to connect,
+        key-ssh: path for the private key file,
+        user-ssh: user to use in the server,
+        host: Hostname of the server where node runs
+        dir-path: path to the app folder you will deploy
+    }
+    
+    example:
+        ./mainy.py landing service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
 
 -[swarm]
 
@@ -123,14 +138,6 @@ This command will setup and launch Portainer service in the domain that user put
 
     example:
         ./mainy.py portainer service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
-
-
--[landing]
-
-This command will to deploy, setup and launch Landin web_page service in the domain that user select
-
-    example:
-        ./mainy.py landing service 54.93.136.166 $HOME/sshkey ubuntu ws01.mysite.com
 
 
 # AUTHORS
