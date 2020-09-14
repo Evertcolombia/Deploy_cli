@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  app:
+    image: nginx:latest
+    volumes:
+      - ".:/usr/share/nginx/html"
+    networks:
+      - traefik-public
+    deploy:
+      placement:
+        constraints:
+          - node.labels.landing.landing-data == true
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.landing-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.landing-frontend-http.rule=PathPrefix(`/`)
+        - traefik.http.routers.landing-http.entrypoints=http
+        - traefik.http.routers.landing-http.middlewares=https-redirect
+        - traefik.http.routers.landing-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.landing-https.entrypoints=https
+        - traefik.http.routers.landing-https.tls=true
+        - traefik.http.routers.landing-https.tls.certresolver=le
+        # - traefik.http.routers.landing-frontend-http.rule=PathPrefix(`/`)
+        - traefik.http.services.landing-frontend.loadbalancer.server.port=80
+
+networks:
+  traefik-public:
+    external: true
+
+volumes:
+  landing-data:

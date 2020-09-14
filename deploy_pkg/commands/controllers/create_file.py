@@ -91,21 +91,24 @@ def swarmpit_data_file(path: str):
     return domain
 
 
-def landing_data_file(path:str):
+def landing_data_file(path:str, dir_path: str):
     msg = "You need a subdomain for Landing service, make you sure that subdomain points to a valid IP ex('landing.mysite.com')\n Enter subdomain name"
-    style(msg, fg=blue, bold=True)
+    msg = style(msg, fg=blue, bold=True)
     domain = prompt(msg)
+    dir_path = dir_path.split("/")[-2]
     data = ['#!/usr/bin/bash\n',
             'export DOMAIN={}\n'.format(domain),
             "export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')\n",
             'docker node update --label-add landing.landing-data=true $NODE_ID\n',
-            'docker stack deploy -c data/landing/releases/prototype/docker-compose.yml landing\n',
+            'mv data/landing/home/fantasma/* data/\n',
+            'rm -rf data/landing\n',
+            'docker stack deploy -c data/{}/docker-compose.yml landing\n'.format(dir_path),
             'docker stack ls\n',
             'docker stack ps landing']
     create_file(data, path)
     return domain
 
-def app_data_file(path:str):
+def app_data_file(pathstr):
     data = ['#!/usr/bin/bash\n',
             'cd viralizer/\n',
             'docker-compose up -d']
