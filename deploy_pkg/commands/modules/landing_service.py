@@ -12,19 +12,19 @@ blue = colors.BLUE
 red = colors.RED
 
 
-def landing_service(server):
+def landing_service(server, dir_path):
     """
         sets landing page on domain
     """
     try:
         path = os.getcwd() + '/commands/templates/landing_file.sh'
         echo(style('Setting landing page service', fg=blue, bold=True))
-        deploy(server)
-        domain = landing_data_file(path)
+        deploy(server, dir_path)
+        domain = landing_data_file(path, dir_path)
         server.put(path, '.')
         server.run('bash landing_file.sh')
         server.run('rm landing_file.sh')
-        #os.remove(path)
+        os.remove(path)
         return domain
     except socket.error:
         echo(style('unable to connect', fg=red, bold=True))
