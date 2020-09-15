@@ -108,7 +108,7 @@ def landing_data_file(path:str, dir_path: str):
     create_file(data, path)
     return domain
 
-def app_data_file(pathstr):
+def app_data_file(path: str):
     data = ['#!/usr/bin/bash\n',
             'cd viralizer/\n',
             'docker-compose up -d']
