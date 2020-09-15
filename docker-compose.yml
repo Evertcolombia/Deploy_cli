@@ -1,0 +1,11 @@
+version: '3'
+services:
+  deploy:
+    build: .
+    ports:
+      - "8000:8000"
+    command: sh -c "while true; do sleep 1; done"
+    volumes:
+      - .:/code
+      - ..:/app
+  
