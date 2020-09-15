@@ -10,6 +10,22 @@ Install and update using pip
 ```
 pip install -r requirements.txt
 ```
+# Docker-Compose
+
+```
+docker-compose up -d
+```
+
+## Enter Container
+
+```
+docker-compose exec deploy bash
+```
+
+
+> connect your app folder with docker volumes
+
+
 # USAGE
 ---------
 
