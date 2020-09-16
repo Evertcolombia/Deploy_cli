@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
 from commands.controllers.create_connection import create_connection
 from commands.controllers.install_docker import install_docker
 from commands.controllers.install_docker_compose import install_docker_compose

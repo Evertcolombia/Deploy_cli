@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/python
 
 from commands.controllers.create_connection import create_connection
 from commands.controllers.init_service import init_service
