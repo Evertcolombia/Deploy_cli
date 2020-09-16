@@ -13,8 +13,10 @@ def do_pack(dir_path):
         if isdir(dir_path) is False:
             echo(style("Folder Don't exists", fg=colors.RED, bold=True),)
             exit(0)
+        if dir_path[-1] != '/':
+            dir_path = dir_path + '/'
         file_name = dir_path + "prototype"
-        system("sudo tar -cvzf {} {}".format(file_name, dir_path))
+        system("tar -cvzf {} {}".format(file_name, dir_path))
         return file_name
     except:
         return None
@@ -22,15 +24,12 @@ def do_pack(dir_path):
 def do_deploy(archive_path, server):
     if exists(archive_path) is False:
         return False
-
     try:
-        folder = archive_path.split("/")[3]
         file_name = archive_path.split("/")[-1]
-        server.run('mkdir -p {}'.format(folder))
+        server.run('mkdir -p {}'.format('viralizer'))
+        server.run('ls $HOME')
         server.put(archive_path, '/tmp/')
         server.run('tar -zxf /tmp/{} -C .'.format(file_name))
-        server.run('cp -r home/fantasma/viralizer/* viralizer/')
-        server.run('rm -rf home/')
         server.run('rm /tmp/{}'.format(file_name))
     except socket.error:
         echo(style('unable to connect', fg=colors.RED, bold=True))
