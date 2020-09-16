@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/python
 
 import os
 
@@ -113,6 +113,12 @@ def app_data_file(path: str):
             'cd viralizer/\n',
             'docker-compose up -d']
     create_file(data, path)
+
+def save_worker(data, key, user):
+    path = os.getcwd() + '/commands/templates/manager_registers.txt'
+    data = ' '.join(data) + ' {} {}\n'.format(user, key)
+    with open(path, 'a+') as f:
+        f.write(data)
 
 
 def create_file(data, path):

@@ -1,4 +1,4 @@
-#!/bin/env/python3
+#!/bin/env/python
 
 from commands.controllers.ssh_config import init_ssh_keys
 from os import getcwd, system
