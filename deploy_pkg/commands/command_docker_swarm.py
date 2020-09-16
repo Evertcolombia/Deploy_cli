@@ -1,12 +1,11 @@
-#!/bin/env python3
+#!/usr/bin/python3
 
 import os
 from commands.controllers.create_connection import create_connection
 from commands.controllers.init_service import init_service
 from commands.controllers.init_swarm import init_swarm
 from commands.controllers.install_docker import install_docker
-from commands.controllers.install_docker_compose.py import \
-    install_docker_compose
+from commands.controllers.install_docker_compose import install_docker_compose
 from typing import Optional
 
 from typer import Argument, Typer, colors, echo, prompt, style
@@ -61,9 +60,9 @@ def add_worker(ip: str = Argument(..., help="Server IP"),
         echo(style(msg, fg=blue, bold=True))
         msg = 'Enter server user for of mannager node'
         user = prompt(style(msg, fg=blue, bold=True))
-        msg = style('Enter path to ssh key file', fg=blue, bold=True))
+        msg = style('Enter path to ssh key file', fg=blue, bold=True)
 
-        msg = style('Enter path to ssh key file', fg=blue, bold=True))
+        msg = style('Enter path to ssh key file', fg=blue, bold=True)
         key = prompt(msg)
         server = create_connection(user, mannager_ip, key)
         st = str(server.run('docker swarm join-token worker')).split()
@@ -74,7 +73,6 @@ def add_worker(ip: str = Argument(..., help="Server IP"),
 
         msg = 'Enter server user for of mannager node'
         user = prompt(style(msg, fg=blue, bold=True))
-        msg = style('Enter path to ssh key file', fg=blue, bold=True))
+        msg = style('Enter path to ssh key file', fg=blue, bold=True)
         key = prompt(msg)
         #server = create_connection(user, ip_mannager, key)
-
