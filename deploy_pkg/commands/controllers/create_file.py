@@ -114,6 +114,12 @@ def app_data_file(path: str):
             'docker-compose up -d']
     create_file(data, path)
 
+def save_worker(data, key, user):
+    path = os.getcwd() + '/commands/templates/manager_registers.txt'
+    data = ' '.join(data) + ' {} {}\n'.format(user, key)
+    with open(path, 'a+') as f:
+        f.write(data)
+
 
 def create_file(data, path):
     with open(path, 'w') as f:
