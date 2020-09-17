@@ -11,20 +11,14 @@ def read_file(path):
     return data
 
 def check_git(server, data):
-    #conf_email = server.run('git config --get user.email')
-    #conf_name = server.run('git config --get user.name')
-    #print(conf_name)
-    #if not conf_name:
-        #print('lulu')
     server.run('git config --global user.name {}'.format(data[0]))
-    #if conf_email == '':
     server.run('git config --global user.email {}'.format(data[1]))
 
 def config_list(path, server):
     try:
         print("hereee")
         data = read_file(path)
-        #check_git(server, data)
+        check_git(server, data)
     except:
         msg = "A problem happened, make sure your git.txt file is well and try again"
         echo(style(msg, fg=colors.RED, bold=True))
@@ -76,7 +70,7 @@ def create_file(data):
 
 def make_clone(server):
     path = getcwd() + '/commands/templates/git.txt'
-    data =  read_file(path)
+    data = read_file(path)
     path2 = create_file(data)
     server.put(path2, '.')
     server.run('bash git_access.sh')
