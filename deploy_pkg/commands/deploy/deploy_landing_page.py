@@ -41,7 +41,7 @@ def do_deploy(archive_path, server):
 
     try:
         name = archive_path.split("/")[-1]
-        path = "data/landing/"
+        path = "data/"
         server.run('mkdir -p {}'.format(path))
         server.put(archive_path, '/tmp/')
         server.run('tar -zxf /tmp/{} -C {}'.format(name, path))

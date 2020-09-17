@@ -5,7 +5,7 @@ from commands.controllers.create_connection import create_connection
 from commands.controllers.create_file import app_data_file
 from commands.deploy.deploy_app_service import deploy
 from commands.controllers.run_app import run_app
-
+from commands.controllers.setup_github import setup_git, make_clone
 from typer import Argument, Typer, colors, echo, style
 
 app = Typer()
@@ -22,6 +22,9 @@ def service(ip: str = Argument(..., help='Server IP'),
     """
     path = os.getcwd() + '/commands/templates/app_file.sh'
     server = create_connection(user_ssh, ip, key_ssh)
-    deploy(server, dir_path)
+    #deploy(server, dir_path)
+    setup_git(server)
+    if os.path.isdir('/viralizer') is False:
+        make_clone(server)
     app_data_file(path)
     run_app(server, path)

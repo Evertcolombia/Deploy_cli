@@ -18,6 +18,7 @@ def landing_service(server, dir_path):
     """
     try:
         path = os.getcwd() + '/commands/templates/landing_file.sh'
+        print(path)
         echo(style('Setting landing page service', fg=blue, bold=True))
         deploy(server, dir_path)
         domain = landing_data_file(path, dir_path)
