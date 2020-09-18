@@ -4,3 +4,6 @@ aiofiles>=0.5.0
 typing
 fabric
 paramiko
+pydantic
+fastapi
+uvicorn
