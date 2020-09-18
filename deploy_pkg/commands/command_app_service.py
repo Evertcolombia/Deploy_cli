@@ -3,9 +3,9 @@
 import os
 from commands.controllers.create_connection import create_connection
 from commands.controllers.create_file import app_data_file
-from commands.deploy.deploy_app_service import deploy
 from commands.controllers.run_app import run_app
-from commands.controllers.setup_github import setup_git, make_clone
+from commands.controllers.setup_github import make_clone, setup_git
+
 from typer import Argument, Typer, colors, echo, style
 
 app = Typer()
@@ -20,11 +20,13 @@ def service(ip: str = Argument(..., help='Server IP'),
         Send directory with your app to the server
         and run services
     """
-    path = os.getcwd() + '/commands/templates/app_file.sh'
+    path = os.getcwd()
+    if '/deploy_pkg' in path:
+        path = path + '/commands/templates/app_file.sh'
+    else:
+        path = path + '/deploy_pkg/commands/templates/app_file.sh'
     server = create_connection(user_ssh, ip, key_ssh)
-    #deploy(server, dir_path)
     setup_git(server)
-    if os.path.isdir('/viralizer') is False:
-        make_clone(server)
+    make_clone(server)
     app_data_file(path)
     run_app(server, path)

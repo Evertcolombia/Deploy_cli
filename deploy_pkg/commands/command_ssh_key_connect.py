@@ -18,8 +18,7 @@ def keygen(key_name: str = Argument(..., help="SSH key name"),
     try:
         init_ssh_keys(key_name, user, ip, bit)
     except:
-        system('rm $HOME/{}'.format(key_name))
-        system('y')
-        msg = "Cant complete the service, out now"
+        system('rm -f $HOME/{}'.format(key_name))
+        msg = "Cant complete the service, Try again."
         echo(style(msg, fg=colors.RED, bold=True))
         exit(0)

@@ -11,6 +11,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get clean
 RUN apt-get install -y curl python3.7 python3.7-dev python3.7-distutils
 RUN apt-get install -y fabric
 RUN apt install openssh-server -y
+RUN apt-get install -y sshpass
 
 # Register the version in alternatives
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
