@@ -5,14 +5,6 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typer import colors, echo, style
 
-from deploy_pkg.commands.controllers.create_connection import create_connection
-from deploy_pkg.commands.controllers.create_file import app_data_file
-from deploy_pkg.commands.controllers.install_docker import install_docker
-from deploy_pkg.commands.controllers.install_docker_compose import \
-    install_docker_compose
-from deploy_pkg.commands.controllers.run_app import run_app
-from deploy_pkg.commands.controllers.setup_github import make_clone, setup_git
-# from deploy_pkg.commands.controllers.ssh_config import init_ssh_keys
 
 from worker import build, ssh, build_app
 
