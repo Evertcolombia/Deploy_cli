@@ -1,21 +1,27 @@
 version: '3'
 services:
+
+  rabbit:
+    image: rabbitmq:latest
+
   deploy:
     build: .
     ports:
-      - "8000:8000"
-    command: sh -c "while true; do sleep 1; done"
-    volumes:
-      - .:/code
-      - ..:/app
-  web:
-    build: .
-    ports:
-      - "9000:8000"
+      - "8080:8080"
     command:
       - /bin/bash
       - -c
       - |
-        uvicorn deploy_api:app --host 0.0.0.0 --reload
+        uvicorn deploy_api:app --host 0.0.0.0 --port 8080 --reload
     volumes:
       - .:/code
+      - ..:/app
+
+  worker:
+    build: .
+    depends_on:
+      - rabbit
+    command: celery worker --app=worker.celery_app -c 2 --loglevel=info
+    volumes:
+      - .:/code
+      - ..:/app

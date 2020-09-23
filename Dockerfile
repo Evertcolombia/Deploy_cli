@@ -24,8 +24,19 @@ RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python get-pip.py --force-reinstall && \
     rm get-pip.py
 
-# (...)
+ENV ENV PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  PIP_NO_CACHE_DIR=off \
+  PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100
 
-# Install Selenium
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip install poetry
+
+COPY pyproject.toml /code/
+
+RUN poetry config virtualenvs.create false \
+  && poetry install --no-interaction --no-ansi
+
+COPY deploy_api.py /code/app.py
+COPY worker.py /code/worker.py

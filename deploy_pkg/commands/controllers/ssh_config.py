@@ -32,7 +32,7 @@ def init_ssh_keys(key, user, ip, bits):
         msg = "There is not a password.txt file with the server password at /code "
         echo(style("{} Create the file and try again".format(msg), fg=colors.BLUE))
         exit(0)
-        
+
     msg = "Send configuration file to HOST"
     echo(style(msg, fg=colors.BLUE, bold=True))
     command = 'scp -v -i $HOME/{} {} {}@{}:/etc/ssh/ssh_config'
