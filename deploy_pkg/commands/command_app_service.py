@@ -14,8 +14,8 @@ app = Typer()
 @app.command()
 def service(ip: str = Argument(..., help='Server IP'),
         key_ssh: str = Argument(..., help='Path to SSH key file'),
-        user_ssh: str = Argument(..., help='Server User'),
-        dir_path: str = Argument(..., help='Folder path')):
+        user_ssh: str = Argument(..., help='Server User')):
+
     """
         Send directory with your app to the server
         and run services
@@ -25,8 +25,9 @@ def service(ip: str = Argument(..., help='Server IP'),
         path = path + '/commands/templates/app_file.sh'
     else:
         path = path + '/deploy_pkg/commands/templates/app_file.sh'
+
     server = create_connection(user_ssh, ip, key_ssh)
-    setup_git(server)
-    make_clone(server)
+    git_path = setup_git(server)
+    make_clone(server, git_path)
     app_data_file(path)
     run_app(server, path)

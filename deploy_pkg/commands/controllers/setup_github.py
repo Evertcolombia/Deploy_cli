@@ -16,9 +16,7 @@ def check_git(server, data):
 
 def config_list(path, server):
     try:
-        print(path)
         data = read_file(path)
-        print(data)
         check_git(server, data)
     except:
         msg = "A problem happened, make sure your git.txt file is well and try again"
@@ -31,11 +29,13 @@ def setup_git(server):
     if exists(path) is False:
         msg = "There is not a configuration file for github access. "
         msg1= "Create the a file called in {} with your Github username, email, url of the repository to clone and password "
-        msg2 = "Ex: 'thevato admin@deploy.wtf user123 https://github.com/Evertcolombia/Deploy_cli.git' and try again."
+        msg2 = "Ex: 'thevato admin@deploy.wtf https://github.com/Evertcolombia/Deploy_cli.git 45.77.212.130
+' and try again."
         echo(style(msg + msg1.format(path) + msg2, fg=colors.RED, bold=True))
         exit(0)
     else:
         config_list(path, server)
+        return path
 
 
 def exec_command(branch, data, server):
@@ -61,7 +61,7 @@ def define_path(filename):
     path = getcwd()
     complete = '/commands/templates/{}'.format(filename)
 
-    if '/deploy/pkg' in path:
+    if '/deploy_pkg' in path:
         path = path + complete
     else:
         path = path + '/deploy_pkg' + complete
@@ -76,7 +76,6 @@ def create_file(data):
         pwd = data[3]
         command = "git clone https://{}:{}@{}".format(data[0], pwd, data[2][8:])
 
-    print(command)
     commands = ['#!/usr/bin/bash\n',
             'if [ ! -d "/root/viralizer" ]\nthen\n',
             "\t{}\n".format(command),
@@ -88,8 +87,7 @@ def create_file(data):
             f.write(line)
     return path
 
-def make_clone(server):
-    path = define_path('git.txt')
+def make_clone(server, path):
     data = read_file(path)
     path2 = create_file(data)
     server.put(path2, '.')
