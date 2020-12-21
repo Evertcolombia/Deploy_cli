@@ -10,6 +10,7 @@ import commands.command_swarmpit_service as swarmpit_service
 import commands.command_swarmprom_service as swarmprom_service
 import commands.command_traefik_service as traefik_service
 import commands.command_app_service as app_service
+import commands.command_vultr_create as servers_create
 import typer
 
 app = typer.Typer()
@@ -23,6 +24,7 @@ app.add_typer(swarmprom_service.app, name='swarmprom')
 app.add_typer(swarmpit_service.app, name='swarmpit')
 app.add_typer(landing_service.app, name='landing')
 app.add_typer(app_service.app, name='app')
+app.add_typer(servers_create.app, name='vultr')
 
 
 if __name__ == "__main__":

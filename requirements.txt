@@ -7,3 +7,4 @@ paramiko
 pydantic
 fastapi
 uvicorn
+vultr
